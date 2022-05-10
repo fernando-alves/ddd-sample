@@ -11,6 +11,7 @@ public class Application {
         Product applePencil = new Product("Apple Pencil");
         Product sonyWirelessHeadphone = new Product("Sony Wireless headphone");
         cart.add(applePencil);
+        cart.add(applePencil);
         cart.add(sonyWirelessHeadphone);
 
         System.out.println("Cart = " + cart);

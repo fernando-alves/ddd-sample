@@ -21,7 +21,7 @@ class CartTest {
     }
 
     @Test
-    void shouldMultipleProductsToCart() {
+    void shouldAddMultipleProductsToCart() {
         Cart cart = new Cart();
         Product aProduct = new Product("Some test product");
         Product anotherProduct = new Product("Another test product");
@@ -33,5 +33,20 @@ class CartTest {
         assertEquals(2, actual.size());
         assertEquals("Some test product", actual.get(0).getName());
         assertEquals("Another test product", actual.get(1).getName());
+    }
+
+    @Test
+    void shouldAddSameProductTwiceToCart() {
+        Cart cart = new Cart();
+        Product product = new Product("Some test product");
+
+        cart.add(product);
+        cart.add(product);
+
+        List<Product> actual = cart.getProducts();
+
+        assertEquals(2, actual.size());
+        assertEquals("Some test product", actual.get(0).getName());
+        assertSame(actual.get(0), actual.get(1));
     }
 }
