@@ -18,6 +18,20 @@ class CartTest {
 
         assertEquals(1, actual.size());
         assertEquals("Some test product", actual.get(0).getName());
+    }
 
+    @Test
+    void shouldMultipleProductsToCart() {
+        Cart cart = new Cart();
+        Product aProduct = new Product("Some test product");
+        Product anotherProduct = new Product("Another test product");
+        cart.add(aProduct);
+        cart.add(anotherProduct);
+
+        List<Product> actual = cart.getProducts();
+
+        assertEquals(2, actual.size());
+        assertEquals("Some test product", actual.get(0).getName());
+        assertEquals("Another test product", actual.get(1).getName());
     }
 }
