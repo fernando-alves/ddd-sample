@@ -82,4 +82,42 @@ class CartTest {
         removedItems.add("Some test product");
         assertEquals(removedItems, cart.getRemovedItems());
     }
+
+    @Test
+    void shouldNotBeEqualsEvenIfItemsAreTheSame() {
+        Cart aCart = new Cart();
+        Cart anotherCart = new Cart();
+        Product aProduct = new Product("Some test product");
+        Item item = new Item(aProduct, 1);
+
+        aCart.add(item);
+        anotherCart.add(item);
+
+        assertFalse(aCart.equals(anotherCart));
+    }
+
+    @Test
+    void shouldNotBeEqualsEvenIfHavingEqualItems() {
+        Cart cart1 = new Cart();
+        Cart cart2 = new Cart();
+
+        Item item1 = new Item(new Product("Sony Wireless headphone"), 1);
+        Item item2 = new Item(new Product("Sony Wireless headphone"), 1);
+
+        cart1.add(item1);
+        cart2.add(item2);
+
+        assertNotEquals(cart1, cart2);
+    }
+
+    @Test
+    void shouldBeEqualsIfSameCart() {
+        Cart aCart = new Cart();
+        Product aProduct = new Product("Some test product");
+        Item item = new Item(aProduct, 1);
+
+        aCart.add(item);
+
+        assertEquals(aCart, aCart);
+    }
 }
