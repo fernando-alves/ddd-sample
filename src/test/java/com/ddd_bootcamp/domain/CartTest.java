@@ -49,4 +49,18 @@ class CartTest {
         assertEquals("Some test product", actual.get(0).getName());
         assertSame(actual.get(0), actual.get(1));
     }
+
+    @Test
+    void shouldAddItemWithGivenQuantityToCart() {
+        Cart cart = new Cart();
+        Product product = new Product("Some test product");
+
+        cart.add(product, 2);
+
+        List<Cart.Item> actual = cart.getItems();
+
+        assertEquals(1, actual.size());
+        assertEquals(2, actual.get(0).getQuantity());
+        assertSame(product, actual.get(0).getProduct());
+    }
 }

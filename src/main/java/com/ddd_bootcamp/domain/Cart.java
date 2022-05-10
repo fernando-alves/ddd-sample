@@ -10,9 +10,15 @@ public class Cart {
         items.add(new Item(product));
     }
 
+    public void add(Product product, int quantity) {
+        items.add(new Item(product, quantity));
+    }
+
     public List<Product> getProducts() {
         return items.stream().map(i -> i.product).toList();
     }
+
+    public List<Item> getItems() { return items; }
 
     @Override
     public String toString() {
@@ -21,11 +27,26 @@ public class Cart {
                 '}';
     }
 
-    private class Item {
-        final Product product;
+    class Item {
+        private final Product product;
+        private int quantity;
 
         private Item(Product product) {
             this.product = product;
+            this.quantity = 1;
+        }
+
+        private Item(Product product, int quantity) {
+            this.product = product;
+            this.quantity = quantity;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public Product getProduct() {
+            return product;
         }
     }
 }
