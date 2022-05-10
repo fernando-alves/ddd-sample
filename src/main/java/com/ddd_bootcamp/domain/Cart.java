@@ -6,16 +6,12 @@ import java.util.List;
 public class Cart {
     private final List<Item> items = new ArrayList<>();
 
-    public void add(Product product) {
-        items.add(new Item(product));
-    }
-
-    public void add(Product product, int quantity) {
-        items.add(new Item(product, quantity));
+    public void add(Item item) {
+        items.add(item);
     }
 
     public void remove(Product product) {
-        items.removeIf(item -> item.product.getName().equals(product.getName()));
+        items.removeIf(item -> item.getProduct().getName().equals(product.getName()));
     }
 
     public List<Item> getItems() { return items; }
@@ -25,28 +21,5 @@ public class Cart {
         return "Cart{" +
                 "items=" + items +
                 '}';
-    }
-
-    public class Item {
-        private final Product product;
-        private int quantity;
-
-        private Item(Product product) {
-            this.product = product;
-            this.quantity = 1;
-        }
-
-        private Item(Product product, int quantity) {
-            this.product = product;
-            this.quantity = quantity;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public Product getProduct() {
-            return product;
-        }
     }
 }

@@ -12,9 +12,9 @@ class CartTest {
     void shouldAddProductToCart() {
         Cart cart = new Cart();
         Product product = new Product("Some test product");
-        cart.add(product);
+        cart.add(new Item(product,1));
 
-        List<Cart.Item> actual = cart.getItems();
+        List<Item> actual = cart.getItems();
 
         assertEquals(1, actual.size());
         assertEquals("Some test product", actual.get(0).getProduct().getName());
@@ -23,12 +23,12 @@ class CartTest {
     @Test
     void shouldAddMultipleProductsToCart() {
         Cart cart = new Cart();
-        Product aProduct = new Product("Some test product");
-        Product anotherProduct = new Product("Another test product");
-        cart.add(aProduct);
-        cart.add(anotherProduct);
+        Item aItem = new Item(new Product("Some test product"), 1);
+        Item anotherItem = new Item(new Product("Another test product"), 1);
+        cart.add(aItem);
+        cart.add(anotherItem);
 
-        List<Cart.Item> actual = cart.getItems();
+        List<Item> actual = cart.getItems();
 
         assertEquals(2, actual.size());
         assertEquals("Some test product", actual.get(0).getProduct().getName());
@@ -38,32 +38,33 @@ class CartTest {
     @Test
     void shouldAddItemWithGivenQuantityToCart() {
         Cart cart = new Cart();
-        Product product = new Product("Some test product");
+        Item item = new Item(new Product("Some test product"), 2);
 
-        cart.add(product, 2);
+        cart.add(item);
 
-        List<Cart.Item> actual = cart.getItems();
+        List<Item> actual = cart.getItems();
 
         assertEquals(1, actual.size());
         assertEquals(2, actual.get(0).getQuantity());
-        assertSame(product, actual.get(0).getProduct());
+        assertSame(item.getProduct(), actual.get(0).getProduct());
     }
 
     @Test
     void shouldRemoveItemFromTheCart() {
         Cart cart = new Cart();
-        Product product = new Product("Some test product");
+        Item item = new Item(new Product("Some test product"), 1);
 
-        cart.add(product, 2);
-        cart.add(new Product("another product"));
+        Product product = new Product("another product");
+        cart.add(item);
+        cart.add(new Item(product, 2));
 
-        List<Cart.Item> actual = cart.getItems();
+        List<Item> actual = cart.getItems();
 
         assertEquals(2, actual.size());
 
         cart.remove(product);
 
         assertEquals(1, actual.size());
-        assertEquals("another product", actual.get(0).getProduct().getName());
+        assertEquals("Some test product", actual.get(0).getProduct().getName());
     }
 }
