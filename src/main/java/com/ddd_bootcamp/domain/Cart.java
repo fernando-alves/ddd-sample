@@ -14,6 +14,10 @@ public class Cart {
         items.add(new Item(product, quantity));
     }
 
+    public void remove(Product product) {
+        items.removeIf(item -> item.product.getName().equals(product.getName()));
+    }
+
     public List<Item> getItems() { return items; }
 
     @Override

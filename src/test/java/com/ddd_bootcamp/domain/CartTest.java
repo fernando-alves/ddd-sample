@@ -48,4 +48,22 @@ class CartTest {
         assertEquals(2, actual.get(0).getQuantity());
         assertSame(product, actual.get(0).getProduct());
     }
+
+    @Test
+    void shouldRemoveItemFromTheCart() {
+        Cart cart = new Cart();
+        Product product = new Product("Some test product");
+
+        cart.add(product, 2);
+        cart.add(new Product("another product"));
+
+        List<Cart.Item> actual = cart.getItems();
+
+        assertEquals(2, actual.size());
+
+        cart.remove(product);
+
+        assertEquals(1, actual.size());
+        assertEquals("another product", actual.get(0).getProduct().getName());
+    }
 }
