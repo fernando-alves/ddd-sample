@@ -2,7 +2,9 @@ package com.ddd_bootcamp.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,5 +68,18 @@ class CartTest {
 
         assertEquals(1, actual.size());
         assertEquals("Some test product", actual.get(0).getProduct().getName());
+    }
+
+    @Test
+    void shouldKeepListWithRemovedItemsFromTheCart() {
+        Cart cart = new Cart();
+        Product aProduct = new Product("Some test product");
+        Item item = new Item(aProduct, 1);
+        cart.add(item);
+        cart.remove(aProduct);
+
+        Set<String> removedItems = new HashSet<>();
+        removedItems.add("Some test product");
+        assertEquals(removedItems, cart.getRemovedItems());
     }
 }
