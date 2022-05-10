@@ -14,10 +14,6 @@ public class Cart {
         items.add(new Item(product, quantity));
     }
 
-    public List<Product> getProducts() {
-        return items.stream().map(i -> i.product).toList();
-    }
-
     public List<Item> getItems() { return items; }
 
     @Override
@@ -27,7 +23,7 @@ public class Cart {
                 '}';
     }
 
-    class Item {
+    public class Item {
         private final Product product;
         private int quantity;
 

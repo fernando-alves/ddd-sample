@@ -14,10 +14,10 @@ class CartTest {
         Product product = new Product("Some test product");
         cart.add(product);
 
-        List<Product> actual = cart.getProducts();
+        List<Cart.Item> actual = cart.getItems();
 
         assertEquals(1, actual.size());
-        assertEquals("Some test product", actual.get(0).getName());
+        assertEquals("Some test product", actual.get(0).getProduct().getName());
     }
 
     @Test
@@ -28,26 +28,11 @@ class CartTest {
         cart.add(aProduct);
         cart.add(anotherProduct);
 
-        List<Product> actual = cart.getProducts();
+        List<Cart.Item> actual = cart.getItems();
 
         assertEquals(2, actual.size());
-        assertEquals("Some test product", actual.get(0).getName());
-        assertEquals("Another test product", actual.get(1).getName());
-    }
-
-    @Test
-    void shouldAddSameProductTwiceToCart() {
-        Cart cart = new Cart();
-        Product product = new Product("Some test product");
-
-        cart.add(product);
-        cart.add(product);
-
-        List<Product> actual = cart.getProducts();
-
-        assertEquals(2, actual.size());
-        assertEquals("Some test product", actual.get(0).getName());
-        assertSame(actual.get(0), actual.get(1));
+        assertEquals("Some test product", actual.get(0).getProduct().getName());
+        assertEquals("Another test product", actual.get(1).getProduct().getName());
     }
 
     @Test

@@ -15,10 +15,10 @@ public class Application {
         cart.add(sonyWirelessHeadphone);
 
         System.out.println("Cart = " + cart);
-        List<Product> products = cart.getProducts();
+        List<Cart.Item> items = cart.getItems();
 
         System.out.println("----------------------------------------");
-        System.out.println("products = " + products);
+        System.out.println("products = " + items);
         System.out.println("----------------------------------------");
     }
 }
